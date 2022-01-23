@@ -1,7 +1,3 @@
-https://drive.google.com/file/d/1sKsbCnmFIc6AM3xoYEMDspZXBZSfcTAt/view?usp=sharing
+Moved them all into GitHub Releases
 
-https://drive.google.com/file/d/1PeArYK21aaWo78m_nGclumJmeV_VDmnE/view?usp=sharing
-
-https://drive.google.com/file/d/1bv1jpSiP-8tfmR0BGZ-EcK2H6gdOvYeb/view?usp=sharing
-
-https://docs.google.com/presentation/d/1DEB79PlWQgxgWVB394tEHLCLv7I8NYk5FZcg3pYLwxA/edit?usp=sharing
+https://github.com/rbeede/BSidesSATX2021/releases
